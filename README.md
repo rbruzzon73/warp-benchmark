@@ -1,5 +1,5 @@
 
-# warp-benchmark scripts
+# warp-benchmark script
 
 *Point Of Attention: warp-benchmark-v2.sh is the last version released*
 
