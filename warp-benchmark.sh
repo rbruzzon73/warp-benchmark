@@ -127,7 +127,7 @@ oc exec -n $NAMESPACE warp-runner -- /bin/sh -c '
       --benchdata "$PUT_FILE" > /dev/null
 
     echo ">>> Analyzing PUT Results:"
-    ./warp analyze "${PUT_FILE}.json.zst"
+    ./warp analyze --analyze.v "${PUT_FILE}.json.zst"
 '
 
 # 7. Pause
@@ -158,7 +158,7 @@ oc exec -n $NAMESPACE warp-runner -- /bin/sh -c '
       --benchdata "$GET_FILE" > /dev/null
 
     echo ">>> Analyzing GET Results:"
-    ./warp analyze "${GET_FILE}.json.zst"
+    ./warp analyze --analyze.v "${GET_FILE}.json.zst"
 '
 
 echo "---------------------------------------------------"
