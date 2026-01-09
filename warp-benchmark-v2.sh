@@ -54,9 +54,10 @@ retio_check () {
 
 start_benchmark () {
 
-    echo "Settings: Concurrent=$WARP_CONCURRENT, Size=$WARP_OBJ_SIZE"
-    echo "Mixed Ratio: $WARP_MIXED_GET_RATIO% GETs - $WARP_MIXED_PUT_RATIO% PUTs - $WARP_MIXED_DELETE_RATIO% DELETEs - $WARP_MIXED_STAT_RATIO% STATs"
-    echo "Pause between benchmarks: $BENCHMARK_PAUSE"
+    echo "Warp General Settings:"
+    echo "Concurrent=$WARP_CONCURRENT - Size=$WARP_OBJ_SIZE"
+    echo "PUT Duration: $WARP_DURATION_PUT - GET Duration: $WARP_DURATION_GET - MIXED Duration: $WARP_DURATION_MIXED"
+    echo "MIXED Ratio: $WARP_MIXED_GET_RATIO% GETs - $WARP_MIXED_PUT_RATIO% PUTs - $WARP_MIXED_DELETE_RATIO% DELETEs - $WARP_MIXED_STAT_RATIO% STATs"
     echo ""
 
 }
