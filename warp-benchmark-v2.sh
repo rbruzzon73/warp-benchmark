@@ -22,13 +22,13 @@ POD_ODB_PAUSE=30           # Sleep applied to ODB post deletion and POD post cre
 # Warp Benchmark Settings
 WARP_CONCURRENT=10         # Number of concurrent operations
 WARP_OBJ_SIZE="1536KiB"    # Object size
-WARP_GET_OBJECTS=60        # Number of objects for GET/MIXED benchmark
-BENCHMARK_PAUSE="30"       # Time to sleep between benchmarks (Integer)
+WARP_GET_OBJECTS="100"     # Number of objects for GET/MIXED benchmark
+BENCHMARK_PAUSE="30"       # sleep between GET and PUT benchmarks (Integer)
 
 # Durations
-WARP_DURATION_PUT="30s"    # Duration for PUT benchmark
-WARP_DURATION_GET="30s"    # Duration for GET benchmark
-WARP_DURATION_MIXED="30s"  # Duration for MIXED benchmark
+WARP_DURATION_PUT="10m"    # Duration for PUT benchmark
+WARP_DURATION_GET="10m"    # Duration for GET benchmark
+WARP_DURATION_MIXED="10m"  # Duration for MIXED benchmark
 
 # Mixed Ration (50 means 50%)
 # Note: The amount of DELETE operations. Must be same or lower than WARP_MIXED_PUT_RATIO
