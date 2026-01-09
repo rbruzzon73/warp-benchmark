@@ -22,7 +22,7 @@ POD_ODB_PAUSE=30           # Sleep applied to ODB post deletion and POD post cre
 # Warp Benchmark Settings
 WARP_CONCURRENT=10         # Number of concurrent operations
 WARP_OBJ_SIZE="1536KiB"    # Object size
-WARP_GET_OBJECTS="100"     # Number of objects for GET/MIXED benchmark
+WARP_GET_OBJECTS="100"     # Number of objects created in the S3 to support GET and MIXED (GET) benchmarks
 BENCHMARK_PAUSE="30"       # sleep between GET and PUT benchmarks (Integer)
 
 # Durations
