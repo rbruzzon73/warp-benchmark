@@ -63,7 +63,7 @@ else
 fi
 
 # 2. Create ObjectBucketClaim (OBC)
-echo "[2/11] Delete and Creating ObjectBucketClaim $OBC_NAME..."
+echo "[2/11] Deleting and Creating ObjectBucketClaim $OBC_NAME..."
 
 if oc get obc $OBC_NAME -n openshift-storage >/dev/null 2>&1; then
     echo "Found existing OBC. Deleting to clean up old data..."
