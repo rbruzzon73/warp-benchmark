@@ -67,6 +67,8 @@ The warp-benchmark scripts support the customization of the following Variables:
 - Operations per second display how many GET / PUT requests the system can handle. 
 - Latency percentiles show response times at p50, p90, p99, and p99.9 levels for operations.
 - TTFB is the time from request was sent to the first byte was received.
+- During the mixed operations phase, the command executes operations according to the configured distribution.
+- The mixed benchmark randomly selects operation types based on the distribution percentages.
 
 ## Usefull links:
 - [MinIO warp](https://docs.min.io/enterprise/minio-warp).
