@@ -63,7 +63,7 @@ The warp-benchmark scripts support the customization of the following Variables:
        WARP_CONCURRENT=10         # Number of concurrent operations
        WARP_OBJ_SIZE="1536KiB"    # Object size
        WARP_GET_OBJECTS=100       # Number of objects for GET/MIXED benchmark
-       BENCHMARK_PAUSE="10s"       # Time to sleep between benchmarks
+       BENCHMARK_PAUSE="10"       # Time to sleep between benchmarks (Integer)
 
        # Durations:
        WARP_DURATION_PUT="30s"    # Duration for PUT benchmark
