@@ -1,7 +1,7 @@
 
-# run-warp-benchmark.sh
+# run-warp-benchmark
 
-## Notes:
+## Notes run-warp-benchmark.sh:
 - run-warp-benchmark.sh is based on Warp MinIO's S3 benchmarking tool designed to measure and analyze object storage performance. 
 - The Warp tool generats realistic workloads and provides detailed performance metrics for S3-compatible storage systems.
 - This script executes PUT and GET benchmarks that can be customized and adjusted to meet various requirements regarding size, duration, parallelism, and delay (sleep) between the two benchmark executions.  
@@ -16,6 +16,9 @@
    [7/8] Sleeping for 2m before GET benchmark...
    [8/8] Running GET Benchmark...
    ~~~
+
+
+
 ## Variables customizable in the run-warp-benchmark.sh script.
 The run-warp-benchmark.sh support the customization of the following Variables groups: 
 
