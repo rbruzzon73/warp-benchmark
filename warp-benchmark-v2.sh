@@ -23,7 +23,7 @@ POD_ODB_PAUSE=30           # Sleep applied to ODB post deletion and POD post cre
 WARP_CONCURRENT=10         # Number of concurrent operations
 WARP_OBJ_SIZE="1536KiB"    # Object size
 WARP_GET_OBJECTS=60        # Number of objects for GET/MIXED benchmark
-BENCHMARK_PAUSE="30s"       # Time to sleep between benchmarks 
+BENCHMARK_PAUSE="30"       # Time to sleep between benchmarks (Integer)
 
 # Durations
 WARP_DURATION_PUT="30s"    # Duration for PUT benchmark
