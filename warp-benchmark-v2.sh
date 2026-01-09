@@ -63,7 +63,17 @@ else
 fi
 
 # 2. Create ObjectBucketClaim (OBC)
-echo "[2/11] Creating ObjectBucketClaim..."
+echo "[2/11] Delete and Creating ObjectBucketClaim $OBC_NAME..."
+
+if oc get obc $OBC_NAME -n openshift-storage >/dev/null 2>&1; then
+    echo "Found existing OBC. Deleting to clean up old data..."
+    oc delete obc $OBC_NAME -n openshift-storage --grace-period=0 --force
+    
+    # Wait for it to disappear
+    echo "Waiting for OBC deletion..."
+    oc wait --for=delete obc/$OBC_NAME -n openshift-storage --timeout=120s
+fi
+
 cat <<EOF | oc apply -f -
 apiVersion: objectbucket.io/v1alpha1
 kind: ObjectBucketClaim
