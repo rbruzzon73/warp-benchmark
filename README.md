@@ -2,8 +2,8 @@
 # Warp Benchmark Script.
 
 ## General Notes:
-   - warp-benchmark-v2.sh is the last version released.
-   - Benchmark tests have been run in a test environment aligned to OCP 4.20 and ODF 4.20.
+   - The latest version of the script is warp-benchmark-v2.sh.
+   - Benchmark tests were conducted in a test environment configured to align with OCP 4.20 and ODF 4.20.
 
 ## Notes warp-benchmark.sh (V1 - OLD version):
 - warp-benchmark.sh is based on Warp MinIO's S3 benchmarking tool designed to measure and analyze object storage performance. 
