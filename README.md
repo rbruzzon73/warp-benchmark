@@ -96,9 +96,10 @@ The warp-benchmark scripts support the customization of the following Variables:
 ~~~
 [root@dr-ocp-bastion-server ~]# ./warp-benchmark-v2.sh all
 #------ Executing Workload: all - 2026-01-09 15:32:01 -------#
-Settings: Concurrent=10, Size=1536KiB
-Mixed Ratio: 50% GETs - 50% PUTs - 0% DELETEs - 0% STATs
-Pause between benchmarks: 30s
+Warp General Settings:
+Concurrent=10 - Size=1536KiB
+PUT Duration: 30s - GET Duration: 30s - MIXED Duration: 30s
+MIXED Ratio: 50% GETs - 50% PUTs - 0% DELETEs - 0% STATs
 
 # Start GET and PUT benchmarks
 [1/11] Creating namespace 'warp-benchmark'...
