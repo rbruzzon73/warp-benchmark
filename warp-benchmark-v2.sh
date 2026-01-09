@@ -3,6 +3,7 @@
 #      run-warp-benchmark-v2.sh - version 2.0 - Jan 9, 2026      #
 #                                                                #
 #       -- New version with GET, PUT and Mixed tests. --         # 
+#       -- Image changed to: quay.io/minio/warp:latest --        #
 #                                                                #
 ###################### rbruzzon@redhat.com #######################
 
@@ -113,7 +114,7 @@ metadata:
 spec:
   containers:
   - name: warp
-    image: minio/warp:latest
+    image: quay.io/minio/warp:latest
     command: ["/bin/sh", "-c", "sleep infinity"]
     env:
       - name: AWS_ACCESS_KEY_ID
