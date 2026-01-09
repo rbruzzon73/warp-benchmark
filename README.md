@@ -32,7 +32,7 @@ The run-warp-benchmark.sh support the customization of the following Variables g
        WARP_CONCURRENT=10         # Number of concurrent operations
        WARP_OBJ_SIZE="1536KiB"    # Object size
        WARP_DURATION_PUT="30s"    # Duration for PUT benchmark
-       WARP_DURATION_GET="30s"   # Duration for GET benchmark
+       WARP_DURATION_GET="30s"    # Duration for GET benchmark
        WARP_GET_OBJECTS=500       # Number of objects for GET benchmark
        BENCHMARK_PAUSE="2m"       # Time to sleep between PUT and GET
        ~~~
