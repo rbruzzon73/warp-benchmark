@@ -1,6 +1,6 @@
 ##################################################################
 #                                                                #
-#        run-warp-benchmark.sh - version 1 - Jan 9, 2026         #
+#        run-warp-benchmark.sh - version 2 - Jan 9, 2026         #
 #                                                                #
 ###################### rbruzzon@redhat.com #######################
 
@@ -26,7 +26,7 @@ echo "Settings: Concurrent=$WARP_CONCURRENT, Size=$WARP_OBJ_SIZE"
 echo "Pause between benchmarks: $BENCHMARK_PAUSE"
 
 # 1. Create Namespace
-echo "[1/7] Creating namespace '$NAMESPACE'..."
+echo "[1/8] Creating namespace '$NAMESPACE'..."
 if ! oc get project $NAMESPACE >/dev/null 2>&1; then
     oc new-project $NAMESPACE
 else
@@ -35,7 +35,7 @@ else
 fi
 
 # 2. Create ObjectBucketClaim (OBC)
-echo "[2/7] Creating ObjectBucketClaim..."
+echo "[2/8] Creating ObjectBucketClaim..."
 cat <<EOF | oc apply -f -
 apiVersion: objectbucket.io/v1alpha1
 kind: ObjectBucketClaim
@@ -48,7 +48,7 @@ spec:
 EOF
 
 # 3. Wait for OBC to be Bound
-echo "[3/7] Waiting for OBC to be bound (provisioning bucket)..."
+echo "[3/8] Waiting for OBC to be bound (provisioning bucket)..."
 while [[ $(oc get obc $OBC_NAME -n openshift-storage -o jsonpath='{.status.phase}') != "Bound" ]]; do
     echo "Waiting for bucket provisioning..."
     sleep 5
@@ -56,7 +56,7 @@ done
 echo "OBC is Bound."
 
 # 4. Extract Secrets
-echo "[4/7] Extracting credentials..."
+echo "[4/8] Extracting credentials..."
 AWS_ACCESS_KEY_ID=$(oc get secret $OBC_NAME -n openshift-storage -o jsonpath='{.data.AWS_ACCESS_KEY_ID}' | base64 -d)
 AWS_SECRET_ACCESS_KEY=$(oc get secret $OBC_NAME -n openshift-storage -o jsonpath='{.data.AWS_SECRET_ACCESS_KEY}' | base64 -d)
 S3_ENDPOINT=$(oc get configmap $OBC_NAME -n openshift-storage -o jsonpath='{.data.BUCKET_HOST}')
@@ -66,7 +66,7 @@ echo "Endpoint: $S3_ENDPOINT"
 echo "Bucket:   $BUCKET_NAME"
 
 # 5. Create Warp Pod
-echo "[5/7] Deploying Warp Runner Pod..."
+echo "[5/8] Deploying Warp Runner Pod..."
 cat <<EOF | oc apply -f -
 apiVersion: v1
 kind: Pod
@@ -107,7 +107,7 @@ echo "Waiting for Pod to be Ready..."
 oc wait --for=condition=Ready pod/warp-runner -n $NAMESPACE --timeout=120s
 
 # 6. Run PUT Benchmark
-echo "[6/7] Running PUT Benchmark..."
+echo "[6/8] Running PUT Benchmark..."
 echo "---------------------------------------------------"
 
 oc exec -n $NAMESPACE warp-runner -- /bin/sh -c '
@@ -132,13 +132,13 @@ oc exec -n $NAMESPACE warp-runner -- /bin/sh -c '
 
 # 7. Pause
 echo "---------------------------------------------------"
-echo "Sleeping for $BENCHMARK_PAUSE before GET benchmark..."
+echo "[7/8] Sleeping for $BENCHMARK_PAUSE before GET benchmark..."
 sleep $BENCHMARK_PAUSE
 echo "Resuming..."
 echo "---------------------------------------------------"
 
 # 8. Run GET Benchmark
-echo "[7/7] Running GET Benchmark..."
+echo "[8/8] Running GET Benchmark..."
 
 oc exec -n $NAMESPACE warp-runner -- /bin/sh -c '
     GET_FILE="${LOG_PREFIX}-get-$(date +%Y%m%d-%H%M%S)"
@@ -167,9 +167,9 @@ echo "---------------------------------------------------"
 echo ""
 echo "-------------------- NOTES ------------------------"
 echo "---------------------------------------------------"
-echo "The output includes download throughput measured in MB/s showing data transfer rates."
-echo "Operations per second display how many GET requests the system can handle."
-echo "Latency percentiles show response times at p50, p90, p99, and p99.9 levels for download operations."
+echo "The output includes throughput measured in MB/s showing data transfer rates."
+echo "Operations per second display how many GET / PUT requests the system can handle."
+echo "Latency percentiles show response times at p50, p90, p99, and p99.9 levels for operations."
 echo "Links:"
 echo "Throughput -> https://docs.min.io/enterprise/minio-warp/reference/#throughput"
 echo "Operations per second -> https://docs.min.io/enterprise/minio-warp/reference/#operations-per-second"
