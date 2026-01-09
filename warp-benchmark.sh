@@ -1,6 +1,6 @@
 ##################################################################
 #                                                                #
-#        run-warp-benchmark.sh - version 2 - Jan 9, 2026         #
+#       run-warp-benchmark.sh - version 1.2 - Jan 9, 2026        #
 #                                                                #
 ###################### rbruzzon@redhat.com #######################
 
