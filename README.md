@@ -41,6 +41,7 @@ The run-warp-benchmark.sh support the customization of the following Variables g
 - The output includes throughput measured in MB/s showing data transfer rates. 
 - Operations per second display how many GET / PUT requests the system can handle. 
 - Latency percentiles show response times at p50, p90, p99, and p99.9 levels for operations.
+- TTFB is the time from request was sent to the first byte was received.
 
 ## Usefull links:
 - [MinIO warp](https://docs.min.io/enterprise/minio-warp).
