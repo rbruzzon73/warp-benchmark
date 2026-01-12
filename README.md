@@ -60,9 +60,9 @@ The warp-benchmark scripts support the customization of the following Variables:
        POD_ODB_PAUSE=30           # Sleep applied to ODB post deletion and POD post creation
 
        # Warp Benchmark Settings:
-       WARP_CONCURRENT=10         # Number of concurrent operations
+       WARP_CONCURRENT=10         # Number of concurrent operations (WARP_CUNCURRENT to be set equal to the number of endpoints)
        WARP_OBJ_SIZE="1536KiB"    # Object size
-       WARP_GET_OBJECTS=100       # Number of objects for GET/MIXED benchmark
+       WARP_GET_OBJECTS=100       # Number of objects pre-allocated to supporte for GET/GET MIXED benchmarks
        BENCHMARK_PAUSE="10"       # Time to sleep between benchmarks (Integer)
 
        # Durations:
