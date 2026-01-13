@@ -66,9 +66,9 @@ The warp-benchmark scripts support the customization of the following Variables:
        BENCHMARK_PAUSE="10"       # Time to sleep between benchmarks (Integer)
 
        # Durations:
-       WARP_DURATION_PUT="30s"    # Duration for PUT benchmark
-       WARP_DURATION_GET="30s"    # Duration for GET benchmark
-       WARP_DURATION_MIXED="30s"  # Duration for MIXED benchmark
+       WARP_DURATION_PUT="10m"    # Duration for PUT benchmark (seconds or minutes: e.g.: 30s, 60s, 10m ..)
+       WARP_DURATION_GET="10m"    # Duration for GET benchmark (seconds or minutes: e.g.: 30s, 60s, 10m ..)
+       WARP_DURATION_MIXED="10m"  # Duration for MIXED benchmark (seconds or minutes: e.g.: 30s, 60s, 10m ..)
 
        # Mixed Ration:
        # Note: The amount of DELETE operations. Must be same or lower than WARP_MIXED_PUT_RATIO
