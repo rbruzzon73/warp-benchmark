@@ -15,7 +15,7 @@ set -e
 
 # Configuration
 NAMESPACE="warp-benchmark"
-STORAGE_CLASS="openshift-storage.noobaa.io"
+STORAGE_CLASS="openshift-storage.noobaa.io" # Use "openshift-storage.noobaa.io" or "ocs-storagecluster-ceph-rgw"
 LOG_PREFIX="custom-run"
 CLEAN_OBC_TIMEOUT="240s"   # Timeout for OBC deletion
 POD_ODB_PAUSE=30           # Sleep applied to ODB post deletion and POD post creation
