@@ -1,9 +1,10 @@
 ##################################################################
 #                                                                #
-#      run-warp-benchmark-v3.sh - version 3.0 - Jan 16, 2026     #
+#      run-warp-benchmark-v3.sh - version 3.1 - Jan 22, 2026     #
 #                                                                #
 #       - New version with GET, PUT and MIXED benchmarks         # 
 #       - Image changed to: quay.io/minio/warp:latest            #
+#       - StorageClass name added to the sript output            #
 #                                                                #
 #  Usage: ./warp-benchmark-v3.sh [mixed|standard|get|put|all]    #
 #                                                                #
@@ -55,7 +56,7 @@ retio_check () {
 start_benchmark () {
 
     echo "Warp General Settings:"
-    echo "Concurrent=$WARP_CONCURRENT - Size=$WARP_OBJ_SIZE"
+    echo "StorageClass=$STORAGE_CLASS - Concurrent=$WARP_CONCURRENT - Size=$WARP_OBJ_SIZE"
     echo "PUT Duration: $WARP_DURATION_PUT - GET Duration: $WARP_DURATION_GET - MIXED Duration: $WARP_DURATION_MIXED"
     echo "MIXED Ratio: $WARP_MIXED_GET_RATIO% GETs - $WARP_MIXED_PUT_RATIO% PUTs - $WARP_MIXED_DELETE_RATIO% DELETEs - $WARP_MIXED_STAT_RATIO% STATs"
     echo ""
