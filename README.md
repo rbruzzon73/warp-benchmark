@@ -2,8 +2,31 @@
 # Warp Benchmark Script.
 
 ## General Notes:
-   - The latest version of the script is warp-benchmark-v3.sh.
-   - Benchmark tests were conducted in a test environment configured to align with OCP 4.20 and ODF 4.20.
+   - The latest version of the script is warp-benchmark-v4.sh.
+   - Benchmark tests were conducted in a test environment configured to align with OCP 4.16 and ODF 4.20.
+
+## Notes warp-benchmark-V4.sh (V4 - LAST version):
+- noobaa deduplication disabled before starting any warp banchmark test as highlighted in the example below:
+   ~~~
+   #------ Executing Workload: mixed - 2026-01-29 15:09:47 -------#
+   [1/15] Ratio check
+   [2/15] Disable noobaa deduplication
+   deployment.apps/noobaa-endpoint updated
+   Waiting for all endpoints to update to value '0'...
+   --- Waiting for pods to scale... (Found 9, Expected 7) ---
+   --- Waiting for pods to scale... (Found 10, Expected 7) ---
+   --- Waiting for pods to scale... (Found 11, Expected 7) ---
+   --- Waiting for pods to scale... (Found 12, Expected 7) ---
+   --- Waiting for pods to scale... (Found 12, Expected 7) ---
+   --- Waiting for pods to scale... (Found 11, Expected 7) ---
+   --- Waiting for pods to scale... (Found 9, Expected 7) ---
+   SUCCESS - All 7 endpoints are now set to 0.
+   [3/15] Warp General Settings:
+   StorageClass=openshift-storage.noobaa.io - Concurrent=7 - Size=1536KiB - noobaa Deduplication Disabled=true
+   PUT Duration: 30s - GET Duration: 30s - MIXED Duration: 30s
+   MIXED Ratio: 50% GETs - 50% PUTs - 0% DELETEs - 0% STATs
+   ... omitted ...
+   ~~~
 
 ## Notes warp-benchmark-V3.sh (V3 - LAST version):
 - script updated with the option to run only GET or PUT tests:
@@ -53,7 +76,7 @@
    [8/8] Running GET Benchmark...
    ~~~
    
-## Variables customizable in the run-warp-benchmark-v2.sh script.
+## Variables customizable in the run-warp-benchmark-v4.sh script.
 The warp-benchmark scripts support the customization of the following Variables: 
 
        # Configuration:
@@ -80,6 +103,12 @@ The warp-benchmark scripts support the customization of the following Variables:
        WARP_MIXED_PUT_RATIO=50        # Mixed Ratio: % of operations that are GETs.
        WARP_MIXED_DELETE_RATIO=0      # Mixed Ratio: % of operations that are DELETEs. 
        WARP_MIXED_STAT_RATIO=0        # Mixed Ratio: % of operations that are STATs.
+
+       # noobaa endopoint deduplication_disabled [true|false]
+       DEDUPLICATION_DISABLE=true
+       SEARCH_TERM="CONFIG_JS_MIN_CHUNK_AGE_FOR_DEDUP"
+       CHECK_INTERVAL=10              # seconds
+
        ~~~
        
 ## Output details:
