@@ -25,7 +25,7 @@ POD_ODB_PAUSE=30           # Sleep applied to ODB post deletion and POD post cre
 WARP_CONCURRENT=$(oc get pods -n openshift-storage | grep endpoint | wc -l)   # Number of concurrent operations
 WARP_OBJ_SIZE="1536KiB"    # Object size
 WARP_GET_OBJECTS="100"     # Number of objects created in the S3 to support GET and MIXED (GET) benchmarks
-BENCHMARK_PAUSE="1"        # sleep between GET and PUT benchmarks (Integer)
+BENCHMARK_PAUSE="60"        # sleep between GET and PUT benchmarks (Integer)
 
 # Durations
 WARP_DURATION_PUT="10m"    # Duration for PUT benchmark
