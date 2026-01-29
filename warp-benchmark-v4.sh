@@ -28,9 +28,9 @@ WARP_GET_OBJECTS="100"     # Number of objects created in the S3 to support GET 
 BENCHMARK_PAUSE="1"        # sleep between GET and PUT benchmarks (Integer)
 
 # Durations
-WARP_DURATION_PUT="30s"    # Duration for PUT benchmark
-WARP_DURATION_GET="30s"    # Duration for GET benchmark
-WARP_DURATION_MIXED="30s"  # Duration for MIXED benchmark
+WARP_DURATION_PUT="10m"    # Duration for PUT benchmark
+WARP_DURATION_GET="10m"    # Duration for GET benchmark
+WARP_DURATION_MIXED="10m"  # Duration for MIXED benchmark
 
 # Mixed Ration (50 means 50%)
 # Note: The amount of DELETE operations. Must be same or lower than WARP_MIXED_PUT_RATIO
@@ -42,7 +42,7 @@ WARP_MIXED_STAT_RATIO=0        # Mixed Ratio: % of operations that are STATs.
 # noobaa endopoint deduplication_disabled [true|false]
 DEDUPLICATION_DISABLE=true
 SEARCH_TERM="CONFIG_JS_MIN_CHUNK_AGE_FOR_DEDUP"
-CHECK_INTERVAL=10 # seconds
+CHECK_INTERVAL=10              # seconds
 
 ratio_check () {
 
@@ -114,6 +114,7 @@ if [ "$STORAGE_CLASS" = "openshift-storage.noobaa.io" ] && [ "$DEDUPLICATION_DIS
 else
 
   oc set env deployment/noobaa-endpoint "${SEARCH_TERM}-" -n openshift-storage
+  sleep 120
     
 fi
 
