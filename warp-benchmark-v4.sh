@@ -22,10 +22,11 @@ CLEAN_OBC_TIMEOUT="240s"   # Timeout for OBC deletion
 POD_ODB_PAUSE=30           # Sleep applied to ODB post deletion and POD post creation
 
 # Warp Benchmark Settings
-WARP_CONCURRENT=$(oc get pods -n openshift-storage | grep endpoint | wc -l)   # Number of concurrent operations
+WARP_CONCURRENT="8"
+# WARP_CONCURRENT=$(oc get pods -n openshift-storage | grep endpoint | wc -l)   # Number of concurrent operations
 WARP_OBJ_SIZE="1536KiB"    # Object size
 WARP_GET_OBJECTS="100"     # Number of objects created in the S3 to support GET and MIXED (GET) benchmarks
-BENCHMARK_PAUSE="60"        # sleep between GET and PUT benchmarks (Integer)
+BENCHMARK_PAUSE="30"        # sleep between GET and PUT benchmarks (Integer)
 
 # Durations
 WARP_DURATION_PUT="10m"    # Duration for PUT benchmark
@@ -103,6 +104,11 @@ if [ "$STORAGE_CLASS" = "openshift-storage.noobaa.io" ] && [ "$DEDUPLICATION_DIS
 
         if [ "$MATCH_COUNT" -eq "$ACTUAL_COUNT" ]; then
             echo "SUCCESS - All $MATCH_COUNT endpoints are now set to 0."
+            for i in $(oc get pods -n openshift-storage | grep endpoint | awk '{print $1}')
+              do
+                echo "# $i"
+                oc get pod $i -n openshift-storage -o yaml | grep CONFIG_JS_MIN_CHUNK_AGE_FOR_DEDUP -A 1
+            done
             break 
         else
             echo "Pending - Only $MATCH_COUNT/$ACTUAL_COUNT pods are updated. Retrying in ${CHECK_INTERVAL}s..."
@@ -115,6 +121,11 @@ else
 
   oc set env deployment/noobaa-endpoint "${SEARCH_TERM}-" -n openshift-storage
   sleep 120
+  for i in $(oc get pods -n openshift-storage | grep endpoint | awk '{print $1}')
+    do
+      echo "# $i"
+      oc get pod $i -n openshift-storage -o yaml | grep CONFIG_JS_MIN_CHUNK_AGE_FOR_DEDUP -A 1
+  done
     
 fi
 
@@ -394,9 +405,11 @@ cleanup_phase () {
     echo "[15/15] Cleanup phase."
     echo "Deleting OBC: $OBC_NAME..."
     oc delete obc $OBC_NAME -n openshift-storage
+    echo "Deleting pod warp-runner..."
     oc delete pod warp-runner -n $NAMESPACE 
+    echo "Enabling noobaa deduplication..."
     oc set env deployment/noobaa-endpoint "${SEARCH_TERM}-" -n openshift-storage
-
+    sleep 120
 }
 
 #
@@ -481,7 +494,15 @@ main () {
 
     # 4. Finish
     cleanup_phase
+
+    for i in $(oc get pods -n openshift-storage | grep endpoint | awk '{print $1}')
+      do
+        echo "# $i"
+        oc get pod $i -n openshift-storage -o yaml | grep CONFIG_JS_MIN_CHUNK_AGE_FOR_DEDUP -A 1
+    done
+
     benchmark_end
+
     exit 6
 }
 
