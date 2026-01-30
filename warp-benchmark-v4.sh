@@ -494,15 +494,7 @@ main () {
 
     # 4. Finish
     cleanup_phase
-
-    for i in $(oc get pods -n openshift-storage | grep endpoint | awk '{print $1}')
-      do
-        echo "# $i"
-        oc get pod $i -n openshift-storage -o yaml | grep CONFIG_JS_MIN_CHUNK_AGE_FOR_DEDUP -A 1
-    done
-
     benchmark_end
-
     exit 6
 }
 
