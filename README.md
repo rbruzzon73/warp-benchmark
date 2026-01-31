@@ -2,10 +2,16 @@
 # Warp Benchmark Script.
 
 ## General Notes:
-   - The latest version of the script is warp-benchmark-v4.sh.
+   - The latest version of the script is warp-benchmark-v5.sh.
    - Benchmark tests were conducted in a test environment configured to align with OCP 4.16 and ODF 4.20.
 
-## Notes warp-benchmark-V4.sh (LAST version):
+## Notes warp-benchmark-V5.sh (LATEST version):
+- warp image defined/assigned via WARP_IMAGE image.
+- noobaa deduplication enable/disable via DEDUPLICATION_DISABLE variable.
+- warp arguments can also be included via EXTRA variable.
+- warp logs/summary redirected to main container log stream.
+
+## Notes warp-benchmark-V4.sh (DEPRECATED version):
 - noobaa deduplication disabled before starting any warp banchmark test as highlighted in the example below:
    ~~~
    #------ Executing Workload: mixed - 2026-01-29 15:09:47 -------#
