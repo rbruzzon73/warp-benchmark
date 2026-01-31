@@ -88,12 +88,14 @@ The warp-benchmark scripts support the customization of the following Variables:
        # Configuration:
        NAMESPACE="warp-benchmark"
        STORAGE_CLASS="openshift-storage.noobaa.io"
+       WARP_IMAGE="quay.io/minio/warp:latest"
        LOG_PREFIX="custom-run"
        CLEAN_OBC_TIMEOUT="240s"   # Timeout for OBC deletion
        POD_ODB_PAUSE=30           # Sleep applied to ODB post deletion and POD post creation
 
        # Warp Benchmark Settings:
-       WARP_CONCURRENT=10         # Number of concurrent operations (WARP_CUNCURRENT to be set equal to the number of endpoints)
+       WARP_CONCURRENT="7"
+       # WARP_CONCURRENT=$(oc get storagecluster ocs-storagecluster -n openshift-storage -o jsonpath='{.spec.multiCloudGateway.endpoints.maxCount}{"\n"}')
        WARP_OBJ_SIZE="1536KiB"    # Object size
        WARP_GET_OBJECTS=100       # Number of objects pre-allocated to supporte for GET/GET MIXED benchmarks
        BENCHMARK_PAUSE="10"       # Time to sleep between benchmarks (Integer)
@@ -111,7 +113,7 @@ The warp-benchmark scripts support the customization of the following Variables:
        WARP_MIXED_STAT_RATIO=0        # Mixed Ratio: % of operations that are STATs.
 
        # noobaa endopoint deduplication_disabled [true|false]
-       DEDUPLICATION_DISABLE=true
+       DEDUPLICATION_DISABLE="true"
        SEARCH_TERM="CONFIG_JS_MIN_CHUNK_AGE_FOR_DEDUP"
        CHECK_INTERVAL=10              # seconds
 
