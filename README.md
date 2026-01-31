@@ -5,7 +5,7 @@
    - The latest version of the script is warp-benchmark-v4.sh.
    - Benchmark tests were conducted in a test environment configured to align with OCP 4.16 and ODF 4.20.
 
-## Notes warp-benchmark-V4.sh (V4 - LAST version):
+## Notes warp-benchmark-V4.sh (LAST version):
 - noobaa deduplication disabled before starting any warp banchmark test as highlighted in the example below:
    ~~~
    #------ Executing Workload: mixed - 2026-01-29 15:09:47 -------#
@@ -28,11 +28,11 @@
    ... omitted ...
    ~~~
 
-## Notes warp-benchmark-V3.sh (V3 - LAST version):
+## Notes warp-benchmark-V3.sh (DEPRECATED version):
 - script updated with the option to run only GET or PUT tests:
 - Usage: ./warp-benchmark-v2.sh [mixed|standard|get|put|all]
 
-## Notes warp-benchmark-v2.sh (V2 - OLD version):
+## Notes warp-benchmark-v2.sh (DEPRECATED version):
 - warp-benchmark-v2.sh delete the old warp POD and regenerate a new one before starting all benchmark tests.
 - warp url image updated to: quay.io/minio/warp:latest
 - Warp ObjectBucketClaim recreated before starting the benchmarcs.
@@ -60,7 +60,7 @@
    [11/11] Benchmarks Complete.
    ~~~ 
    
-## Notes warp-benchmark-v1.sh (V1 - OLD version):
+## Notes warp-benchmark-v1.sh (DEPRECATED version):
 - warp-benchmark.sh is based on Warp MinIO's S3 benchmarking tool designed to measure and analyze object storage performance. 
 - The Warp tool generats realistic workloads and provides detailed performance metrics for S3-compatible storage systems.
 - This warp-benchmark.sh script executes PUT and GET benchmarks that can be customized and adjusted to meet various requirements regarding size, duration, parallelism, and delay (sleep) between the two benchmark executions.  
