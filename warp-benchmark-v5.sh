@@ -42,7 +42,7 @@ WARP_MIXED_DELETE_RATIO=0      # Mixed Ratio: % of operations that are DELETEs.
 WARP_MIXED_STAT_RATIO=0        # Mixed Ratio: % of operations that are STATs.
 
 # noobaa endopoint deduplication [true|false]
-DEDUPLICATION_DISABLE="false"
+DEDUPLICATION_DISABLE="true"
 SEARCH_TERM="CONFIG_JS_MIN_CHUNK_AGE_FOR_DEDUP"
 CHECK_INTERVAL=10              # seconds
 
