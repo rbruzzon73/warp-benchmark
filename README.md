@@ -9,7 +9,7 @@
 - warp image defined/assigned via WARP_IMAGE image.
 - noobaa deduplication enable/disable via DEDUPLICATION_DISABLE variable.
 - warp arguments can also be included via EXTRA variable.
-- warp logs/summary redirected to main container log stream.
+- warp summary redirected to main container log stream.
 
 ## Notes warp-benchmark-V4.sh (DEPRECATED version):
 - noobaa deduplication disabled before starting any warp banchmark test as highlighted in the example below:
