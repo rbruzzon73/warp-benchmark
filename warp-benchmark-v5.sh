@@ -30,9 +30,9 @@ WARP_GET_OBJECTS="100"     # Number of objects created in the S3 to support GET 
 BENCHMARK_PAUSE="30"       # sleep between GET and PUT benchmarks (Integer)
 
 # Durations
-WARP_DURATION_PUT="10m"    # Duration for PUT benchmark
-WARP_DURATION_GET="10m"    # Duration for GET benchmark
-WARP_DURATION_MIXED="10m"  # Duration for MIXED benchmark
+WARP_DURATION_PUT="15s"    # Duration for PUT benchmark (e.g.: 120s, 600s, 5m, 10m)
+WARP_DURATION_GET="15s"    # Duration for GET benchmark (e.g.: 120s, 600s, 5m, 10m)
+WARP_DURATION_MIXED="15s"  # Duration for MIXED benchmark (e.g.: 120s, 600s, 5m, 10m)
 
 # Mixed Ration (50 means 50%)
 # Note: The amount of DELETE operations. Must be same or lower than WARP_MIXED_PUT_RATIO
@@ -77,7 +77,7 @@ start_benchmark () {
 deduplication () {
 
 if [ "$STORAGE_CLASS" = "openshift-storage.noobaa.io" ] && [ "$DEDUPLICATION_DISABLE" = "true" ]; then
-    echo "[2/15] Disable noobaa deduplication"
+    echo "[2/15] Setting noobaa deduplication_disable to $DEDUPLICATION_DISABLE"
     
     # Trigger the update
     oc set env deployment/noobaa-endpoint "$SEARCH_TERM=0" -n openshift-storage
@@ -123,8 +123,6 @@ if [ "$STORAGE_CLASS" = "openshift-storage.noobaa.io" ] && [ "$DEDUPLICATION_DIS
     done
 
 else
-
-  echo "[2/15] Removing NooBaa deduplication override"
 
   oc set env deployment/noobaa-endpoint "${SEARCH_TERM}-" -n openshift-storage
     
@@ -440,7 +438,7 @@ run_mixed () {
 benchmark_end () {
     
     echo "---------------------------------------------------"
-    echo "[14/15] Benchmarks Complete."
+    echo "[15/15] Benchmarks Complete."
     echo "---------------------------------------------------"
     echo ""
     echo "-------------------- NOTES ------------------------"
@@ -456,11 +454,15 @@ benchmark_end () {
 }
 
 cleanup_phase () {
-    echo "[15/15] Cleanup phase."
+    echo "[14/15] Cleanup phase."
     echo "Deleting OBC: $OBC_NAME..."
     oc delete obc $OBC_NAME -n openshift-storage
     echo "Deleting pod warp-runner..."
     oc delete pod warp-runner -n $NAMESPACE 
+    echo "Enabling noobaa deduplication..."
+    DEDUPLICATION_DISABLE=false
+    deduplication
+
 }
 
 #
@@ -548,10 +550,6 @@ main () {
       # Deleting OBC and warp POD 
       cleanup_phase
     
-      # Enable deduplication
-      DEDUPLICATION_DISABLE=false
-      deduplication
-
       # Notes
       benchmark_end
 
