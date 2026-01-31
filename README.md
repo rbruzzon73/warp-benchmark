@@ -322,7 +322,7 @@ Waiting for all endpoints to clear the environment variable...
 --- Waiting for pods to scale... (Found 9, Expected 8) ---
 SUCCESS - Variable 'CONFIG_JS_MIN_CHUNK_AGE_FOR_DEDUP' has been removed from all 8 pods.
 ---------------------------------------------------
-[15/15] Benchmarks Complete.
+[15/15] Benchmarks Completed.
 ---------------------------------------------------
 
 -------------------- NOTES ------------------------
