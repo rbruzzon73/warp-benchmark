@@ -1,15 +1,15 @@
-##################################################################################
-#                                                                                #
-#         run-warp-benchmark-v5.sh - version 5.0 - Jan 31, 2026                  #
-#                                                                                #
-#       - warp image defined/assigned via WARP_IMAGE image                       #
-#       - noobaa deduplication enable/disable via DEDUPLICATION_DISABLE variable #
-#       - warp arguments can also be included via EXTRA variable                 #
-#       - warp logs/summary redirected to main container log stream              #
-#                                                                                #
-#         Usage: ./warp-benchmark-v5.sh [mixed|standard|get|put|all]             #
-#                                                                                #
-############################# rbruzzon@redhat.com ################################
+####################################################################################################
+#                                                                                                  #
+#         run-warp-benchmark-v5.sh - version 5.0 - Jan 31, 2026                                    #
+#                                                                                                  #
+#       - warp image defined/assigned via WARP_IMAGE image                                         #
+#       - noobaa Not Skip chanks for Deduplication enable/disable via NOT_SKIP_NEW_CHANKS variable #
+#       - warp arguments can also be included via EXTRA variable                                   #
+#       - warp logs/summary redirected to main container log stream                                #
+#                                                                                                  #
+#         Usage: ./warp-benchmark-v5.sh [mixed|standard|get|put|all]                               #
+#                                                                                                  #
+############################# rbruzzon@redhat.com ##################################################
 
 #!/bin/bash
 set -e
@@ -42,7 +42,7 @@ WARP_MIXED_DELETE_RATIO=0      # Mixed Ratio: % of operations that are DELETEs.
 WARP_MIXED_STAT_RATIO=0        # Mixed Ratio: % of operations that are STATs.
 
 # noobaa endopoint deduplication [true|false]
-DEDUPLICATION_DISABLE="true"
+NOT_SKIP_NEW_CHANKS="true"
 SEARCH_TERM="CONFIG_JS_MIN_CHUNK_AGE_FOR_DEDUP"
 CHECK_INTERVAL=10              # seconds
 
@@ -68,7 +68,7 @@ start_benchmark () {
 
     echo "[3/15] Warp General Settings:"
     echo "StorageClass: $STORAGE_CLASS - Concurrent: $WARP_CONCURRENT - Size: $WARP_OBJ_SIZE" 
-    echo "Noobaa Deduplication: $DEDUPLICATION_DISABLE - Noobaa Endpoints: $WARP_CONCURRENT"
+    echo "Noobaa Not Skip chanks for Deduplication: $NOT_SKIP_NEW_CHANKS - Noobaa Endpoints: $WARP_CONCURRENT"
     echo "PUT Duration: $WARP_DURATION_PUT - GET Duration: $WARP_DURATION_GET - MIXED Duration: $WARP_DURATION_MIXED"
     echo "MIXED Ratio: $WARP_MIXED_GET_RATIO% GETs - $WARP_MIXED_PUT_RATIO% PUTs - $WARP_MIXED_DELETE_RATIO% DELETEs - $WARP_MIXED_STAT_RATIO% STATs"
 
@@ -76,8 +76,8 @@ start_benchmark () {
 
 deduplication () {
 
-if [ "$STORAGE_CLASS" = "openshift-storage.noobaa.io" ] && [ "$DEDUPLICATION_DISABLE" = "true" ]; then
-    echo "[2/15] Setting noobaa deduplication_disable to $DEDUPLICATION_DISABLE"
+if [ "$STORAGE_CLASS" = "openshift-storage.noobaa.io" ] && [ "$NOT_SKIP_NEW_CHANKS" = "true" ]; then
+    echo "[2/15] Setting noobaa Not Skip New Chanks Deduplication to $NOT_SKIP_NEW_CHANKS"
     
     # Trigger the update
     oc set env deployment/noobaa-endpoint "$SEARCH_TERM=0" -n openshift-storage
@@ -459,8 +459,8 @@ cleanup_phase () {
     oc delete obc $OBC_NAME -n openshift-storage
     echo "Deleting pod warp-runner..."
     oc delete pod warp-runner -n $NAMESPACE 
-    echo "Enabling noobaa deduplication..."
-    DEDUPLICATION_DISABLE=false
+    echo "Enabling noobaa Skip New Chanks ..."
+    NOT_SKIP_NEW_CHANKS=false
     deduplication
 
 }
