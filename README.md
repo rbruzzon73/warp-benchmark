@@ -114,7 +114,7 @@ The warp-benchmark scripts support the customization of the following Variables:
        WARP_MIXED_STAT_RATIO=0        # Mixed Ratio: % of operations that are STATs.
 
        # noobaa endopoint deduplication_disabled [true|false]
-       DEDUPLICATION_DISABLE="true"
+       NOT_SKIP_NEW_CHUNKS="true"
        SEARCH_TERM="CONFIG_JS_MIN_CHUNK_AGE_FOR_DEDUP"
        CHECK_INTERVAL=10              # seconds
 
