@@ -7,7 +7,8 @@
 
 ## Notes warp-benchmark-V5.sh (LATEST version):
 - warp image defined/assigned via WARP_IMAGE variable.
-- noobaa deduplication enable/disable via DEDUPLICATION_DISABLE variable.
+- Disable the option to exclude relatively new chunks from deduplication (SKIP_NEW_CHANKS variable).  
+  Setting it to 0 ensures all new chunks are considered for deduplication, whereas the default considers only chunks that are 1 hour old.
 - warp arguments can also be included via EXTRA variable.
 - warp summary redirected to main container log stream.
 
