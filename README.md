@@ -6,7 +6,7 @@
    - Benchmark tests were conducted in a test environment configured to align with OCP 4.16 and ODF 4.20.
 
 ## Notes warp-benchmark-V5.sh (LATEST version):
-- warp image defined/assigned via WARP_IMAGE image.
+- warp image defined/assigned via WARP_IMAGE variable.
 - noobaa deduplication enable/disable via DEDUPLICATION_DISABLE variable.
 - warp arguments can also be included via EXTRA variable.
 - warp summary redirected to main container log stream.
